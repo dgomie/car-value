@@ -25,10 +25,13 @@ export class UsersController {
     return this.usersService.findOne(parseInt(id));
   }
 
- @Patch('/:id')
- updateUser(@Param('id') id:string, @Body() body: CreateUserDto){
-    return this.usersService.update(parseInt(id), body)
- }
+  @Get('')
+  findAllUsers(@Query('email') email: string) {
+    return this.usersService.find(email);
+  }
 
-
+  @Patch('/:id')
+  updateUser(@Param('id') id: string, @Body() body: CreateUserDto) {
+    return this.usersService.update(parseInt(id), body);
+  }
 }
