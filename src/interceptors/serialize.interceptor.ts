@@ -6,26 +6,24 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { plainToClass } from 'class-transformer';
-import { UserDto } from 'src/users/dtos/user.dto';
-
+import { plainToClass, plainToInstance } from 'class-transformer';
 
 export class SerializeInterceptor implements NestInterceptor {
-    intercept(
-      context: ExecutionContext,
-      handler: CallHandler<any>,
-    ): Observable<any> {
-      
-  
-      return handler.handle().pipe(
-        map((data: any) => {
-          return plainToClass(UserDto, data, {
-            excludeExtraneousValues: true,
-          })
-        }),
-      );
-    }
+  constructor(private dto: any) {}
+
+  intercept(
+    context: ExecutionContext,
+    handler: CallHandler<any>,
+  ): Observable<any> {
+    return handler.handle().pipe(
+      map((data: any) => {
+        return plainToInstance(this.dto, data, {
+          excludeExtraneousValues: true,
+        });
+      }),
+    );
   }
+}
 
 // export class SerializeInterceptor implements NestInterceptor {
 //   intercept(
