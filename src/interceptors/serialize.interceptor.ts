@@ -9,11 +9,11 @@ import { map } from 'rxjs';
 import { plainToClass, plainToInstance } from 'class-transformer';
 
 interface ClassConstructor {
-    new (...args: any[]): {}
+  new (...args: any[]): {};
 }
 
 export function Serialize(dto: ClassConstructor) {
-    return UseInterceptors(new SerializeInterceptor(dto))
+  return UseInterceptors(new SerializeInterceptor(dto));
 }
 
 export class SerializeInterceptor implements NestInterceptor {
