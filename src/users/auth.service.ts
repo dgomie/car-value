@@ -20,15 +20,15 @@ export class AuthService {
     const salt = randomBytes(8).toString('hex');
 
     //hash salt and password together
-    const hash = await scrypt(password, salt, 32) as Buffer;
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     //join the hashed result and salt together
-    const result = salt + '.' + hash.toString('hex')
+    const result = salt + '.' + hash.toString('hex');
     //create new user and save it
-    const user = await this.usersService.create(email, result)
+    const user = await this.usersService.create(email, result);
 
     //return the user
-    return user
+    return user;
   }
 
   signin() {}
