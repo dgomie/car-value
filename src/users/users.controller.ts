@@ -26,9 +26,7 @@ export class UsersController {
   ) {}
 
   @Get('/whoami')
-  async whoAmI(@Session() session: any) {
-    const user = await this.usersService.findOne(session.userId);
-    console.log("You're email is:", user.email);
+  whoAmI(@Session() session: any) {
     return this.usersService.findOne(session.userId);
   }
 
