@@ -48,8 +48,8 @@ export class AuthService {
 
     // compare the stored hashed password with provided hashed password
     if (storedHash !== hash.toString('hex')) {
-      throw new BadRequestException('bad password')
-    } 
+      throw new BadRequestException('bad password');
+    }
 
     return user;
   }
